@@ -18,7 +18,7 @@ var JsQuizzer = (function(){
     /** 
      * The buildQuestionSet function builds the question set by selecting 
      * JSON from the question bank and converting it into JS objects.
-     * These object are then stored in the questionSet Array which is
+     * These objects are then stored in the questionSet Array which is
      * returned
     */
     function buildQuestionSet(){
@@ -43,6 +43,12 @@ var JsQuizzer = (function(){
      * in the question set.
     */
     function answerOrderScrambler( questionSet ){
+
+    }
+    /**
+     * Loads the settings into a object.
+     */
+    function settingsLoader(){
 
     }
     
