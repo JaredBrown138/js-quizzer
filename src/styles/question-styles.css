@@ -1,0 +1,63 @@
+h2, p{
+  margin: 0px;
+}
+
+.question-main{
+  width: 100%;
+  font-family: 'Share Tech', sans-serif;
+  height: auto;
+}
+.question-box{
+  width: 60%;
+  margin: auto;
+  border: 3px solid black;
+  margin-top: 80px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.question-header{
+  background-color: rgb(12, 12, 12);
+  color: white;
+  padding: 30px;
+}
+.question-header-text, .question-text{
+  display: inline-block;
+}
+.question-set{
+  padding: 25px;
+  margin-bottom: 70px;
+}
+.question-answer-wrapper{
+  padding: 15px;
+}
+.question-button-set{
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+}
+.question-back-button, .question-next-button{
+  display: inline-block;
+  border: 1px solid black;
+  padding: 15px;
+  color: white;
+  background-color: rgb(12, 12, 12);
+}
+.question-counter{
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  text-decoration: underline;
+}
+.question-back-button:active, .question-next-button:active{
+  color: black !important;
+  background-color: white !important;
+  border: 1px solid black;
+}
+.unselectable {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

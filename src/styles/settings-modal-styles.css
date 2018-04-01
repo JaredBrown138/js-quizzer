@@ -97,7 +97,7 @@ body{
   min-width: 750px;
 }
 .navbar-logo{
-  font-family: 'Bungee Inline', cursive !important;
+  font-family: 'Share Tech', sans-serif;
   font-size: 35px !important;
   color: rgb(200, 200, 200);
   background-color: black !important;
@@ -109,7 +109,7 @@ body{
   text-align: center;
   line-height: 70px;
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Share Tech', sans-serif;
   min-width: 128px;
 }
 .settings-icon{
