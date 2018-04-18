@@ -1,4 +1,4 @@
-{
+var questionBank = {
     "q1":{
         "question": "This is a question",
         "category": "Category",

@@ -1,0 +1,12 @@
+ko.components.register("homecomponent", {
+  template:
+    '\
+        <div class="home-main">\
+            <img class="home-image" src="media/images/startup.jpg" />\
+            <div class="home-text-box">\
+                <div class="home-title">REVIEW-JS</div>\
+                <div class="home-tagline">TEST YOUR JS KNOWLEDGE</div>\
+                <div role="button" class="home-start-button unselectable">START QUIZ</div>\
+            </div>\
+        </div>'
+});

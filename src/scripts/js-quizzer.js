@@ -3,8 +3,6 @@ var JsQuizzer = (function(){
     const QUESTIONS_PATH = "./questions/question-bank.json";
     const CLIENT_SETTINGS_PATH = "./settings/client-settings";
     
-    var settings = require(SETTINGS_PATH);
-    var questionBank = require(QUESTIONS_PATH);
     
     var questionSet = []; //Holds the set of question objects for the quiz
     
@@ -13,7 +11,7 @@ var JsQuizzer = (function(){
      * using other functions.
      */
     function setup(){
-       console.log(questionBankSize(questionBank));
+      
     }
     /** 
      * The buildQuestionSet function builds the question set by selecting 
@@ -29,7 +27,7 @@ var JsQuizzer = (function(){
      * of the question bank.
      */
     function questionBankSize(questionBank){
-        return Object.keys(questionBank).length;
+        
     }
     /**
      * Scrambles the order of the questions for the 
@@ -52,21 +50,31 @@ var JsQuizzer = (function(){
 
     }
     
-    
-    
-    
-    
-    
-    
-    
     setup();
 
     return{
         testLog: function(){
             console.log("Test");
+        },
+        testObject: {
+            "q1":{
+                "question": "This is a question",
+                "category": "Category",
+                "a1": "Answer 1.",
+                "a2": "Answer 2.",
+                "a3": "Answer 3.",
+                "a4": "Answer 4.",
+                "selected": ""
+            },
+            "q2":{
+                "question": "This is the second question",
+                "category": "Category",
+                "a1": "This is a answer",
+                "a2": "This is a answer",
+                "a3": "This is a correct answer",
+                "a4": "This is a answer",
+                "selected": ""
+            }
         }
     };
 });
-
-var instance = new JsQuizzer();
-instance.testLog();

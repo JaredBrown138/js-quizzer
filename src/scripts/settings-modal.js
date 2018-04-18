@@ -8,18 +8,6 @@
 ;===========================================
 */ 
 
-$(document).ready(function() {
-  $("#settingsTrigger").click(x => {
-    settingsModal.initialize(settings);
-  });
-  $(document.body).on("click", ".settings-close", function() {
-    settingsModal.destroy();
-  });
-  $(document.body).on("click", ".settings-save", function() {
-    saveSettings(settings, $("#settings-form"));
-  });
-});
-
 var settingsModal = {
   destroy: function() {
     $(".settings-cover").remove();
