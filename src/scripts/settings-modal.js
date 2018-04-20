@@ -105,9 +105,13 @@ function buildSettingsSelect(testObject, settingText, type, options, name, optio
 }
 
 function saveSettings(testObject, formObject){
+    var vm = ViewModel; //Local Reference to the main App ViewModel
     var updatedSettings = jQuery.extend({}, testObject);
     console.log("The following settings have been saved:"); 
     console.table(formObject.serializeArray());
-    $(".settings-modal").append("<p class='save-message'>Settings have been saved</p>");
-       
+    if( vm.initialized() === false){
+      $(".settings-modal").append("<p class='save-message'>Settings have been saved!</p>");
+    }else{
+      $(".settings-modal").append("<p class='save-message'>Settings will be applied when you start your next quiz!</p>");
+    }   
 }

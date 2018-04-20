@@ -57,22 +57,23 @@ var JsQuizzer = (function(){
             console.log("Test");
         },
         testObject: {
+            "questionCount": 2,
             "q1":{
-                "question": "This is a question",
-                "category": "Category",
-                "a1": "Answer 1.",
-                "a2": "Answer 2.",
-                "a3": "Answer 3.",
-                "a4": "Answer 4.",
+                "question": "____________ pause running JavaScript code.  One that is most common is _____________.",
+                "category": "General",
+                "a1": "Breakpoints; Line-of-code",
+                "a2": "Suspensions; Line-of-code",
+                "a3": "Event Listeners; XHR",
+                "a4": "DOM; Conditional line-of-code",
                 "selected": ""
             },
             "q2":{
-                "question": "This is the second question",
-                "category": "Category",
-                "a1": "This is a answer",
-                "a2": "This is a answer",
-                "a3": "This is a correct answer",
-                "a4": "This is a answer",
+                "question": "What are object literals?",
+                "category": "Objects",
+                "a1": "Objects that are created as functions and their properties are initialized through parameterized values.",
+                "a2": "Simple event-registration methods for each of the commonly used and universally implemented browser events. ",
+                "a3": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces.",
+                "a4": "None of the above.",
                 "selected": ""
             }
         }

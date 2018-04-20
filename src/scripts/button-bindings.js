@@ -31,6 +31,9 @@
   $(document.body).on("click", ".navbar-home", function() {
     navigate("Home");
   });
+  $(document.body).on("click", ".actionButton", function() {
+    navigate("actionButton");
+  });
    
    
    /** 
@@ -46,8 +49,13 @@
    $(document.body).on("click", ".question-next-button", function() {
     console.log('clicked');
     ViewModel.progress();
-
   });
+
+  $(document.body).on("click", ".question-back-button", function() {
+    console.log('clicked');
+    ViewModel.regress();
+  });
+
 
 
  });

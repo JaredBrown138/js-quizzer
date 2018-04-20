@@ -4,10 +4,12 @@ const CONFIRM_MESSAGE = "Are you sure you would like to return home? " +
 function navigate(target){
     switch( target ){
         case "Home": {
-            if(navigateAway() === true){
-                ViewModel.activeComponent("homecomponent")
-            }
-        
+            ViewModel.activeComponent("homecomponent");
+            break;
+        }
+        case "actionButton":{
+            actionButton();
+            break;
         }
     }
 }
@@ -27,3 +29,14 @@ function navigateAway(){
         location.reload();
     }
 }
+function actionButton(){
+    if(ViewModel.activeComponent() === "quizcomponent"){
+        if(confirm("Are you sure you want to quit?")){
+            ViewModel.quit();
+        }
+        
+    }else{
+        ViewModel.activeComponent("quizcomponent");
+    }
+}
+//
