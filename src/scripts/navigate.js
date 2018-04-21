@@ -39,4 +39,7 @@ function actionButton(){
         ViewModel.activeComponent("quizcomponent");
     }
 }
+function refreshForNext(){
+    
+}
 //

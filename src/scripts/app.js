@@ -1,30 +1,37 @@
 $(function(){
     function AppViewModel(){
         var self = this;
-        self.JSQ = new JsQuizzer();
-        self.testObject = ko.mapping.fromJS(self.JSQ.testObject);
-        self.questionCount = self.testObject["questionCount"];
+        self.JSQ = ""
+        self.testObject = "";
+        self.questionCount = ""
+
+        self.completedQuizObject = self.testObject; //Overidden in self.completeQuiz()
         
         self.activeComponent = ko.observable("homecomponent")
         self.navBar = ko.observable("navbarcomponent");
 
         self.initialized = ko.observable(false); //Keeps track of whether the user has started a quiz yet
         
-        self.currentQuestionNumber = ko.observable(1).extend({notify: 'always'});
+        self.currentQuestionNumber = "";
         
-        self.progressTracker = ko.computed(function(){
-            return ("QUESTION " + self.currentQuestionNumber() + " OF " + self.questionCount());
-        }, self).extend({notify: 'always'});;
+        self.progressTracker = "";
         
-        self.currentQuestionObject = ko.computed(function(){
-            return self.testObject["q" + self.currentQuestionNumber()];
-        }).extend({notify: 'always'});
-        
+        self.currentQuestionObject = "";
 
         self.start = function(){
             self.activeComponent("quizcomponent");
             if(!self.initialized()){
                 self.initialized(true);
+                self.JSQ = new JsQuizzer();
+                self.testObject = ko.mapping.fromJS(self.JSQ.testObject);
+                self.questionCount = self.testObject["questionCount"];
+                self.currentQuestionNumber = ko.observable(1).extend({notify: 'always'});
+                self.progressTracker = ko.computed(function(){
+                    return ("QUESTION " + self.currentQuestionNumber() + " OF " + self.questionCount());
+                }, self).extend({notify: 'always'});
+                self.currentQuestionObject = ko.computed(function(){
+                    return self.testObject["q" + self.currentQuestionNumber()];
+                }).extend({notify: 'always'});
             }
 
         }
@@ -45,7 +52,7 @@ $(function(){
                 self.currentQuestionNumber(next);
             }
             
-            console.log("User Action: Progression");
+            
         }
         self.regress = function(){
             var current = self.currentQuestionNumber();
@@ -54,14 +61,14 @@ $(function(){
                 //If on first question, go to homepage on regress
                 self.activeComponent("homecomponent");
             }else{
-                console.log("User Action: Regression");
+                
                 self.currentQuestionNumber(last);
             }        
         }
 
         self.getAnsweredCount = function(){
             var JsTestObject = ko.mapping.toJS(self.testObject);
-            console.log(JsTestObject);
+            
             var count = 0;
             $.each(JsTestObject, function(key, value){
                 if( key !== "questionCount" ){
@@ -70,28 +77,25 @@ $(function(){
                     }
                 }
             });
-            console.log(count + " question(s) completed!");
             return count;
         }
-        
-        self.completeQuiz = function(){
-            console.log("User Action: Complete");
-            var answerCount = self.getAnsweredCount();
-            var confirmComplete = "Are you sure you want to submit your quiz? You only answered " +
-            answerCount + " questions out of " + self.questionCount() + " questions!";
-            if(answerCount < self.questionCount()){
-                if(confirm(confirmComplete)){
-                    self.activeComponent("resultscomponent");
-                    self.initialized(false);
-                    self.testObject = ko.mapping.fromJS(self.JSQ.testObject);
-                    self.currentQuestionNumber(1);
 
-                }
+        self.completeQuiz = function(){
+           
+            var answerCount = self.getAnsweredCount();
+            var unanswered = self.testObject.questionCount() - self.getAnsweredCount()
+            var confirmComplete = "Dear Sir/Madam," + "\n\n" +  "You have unfortunately left " + unanswered +
+                " question(s) blank. Please go back and answer them." + "\n\n" + "Best Regards," +
+                "\n" +  "Management";
+            if(answerCount < self.questionCount()){
+                alert(confirmComplete);
             }else{
+                self.completedQuizObject = self.testObject; 
                 self.activeComponent("resultscomponent");
                 self.initialized(false);
                 self.testObject = ko.mapping.fromJS(self.JSQ.testObject);
                 self.currentQuestionNumber(1);
+                console.log(self.activeComponent());
             }
         }
         

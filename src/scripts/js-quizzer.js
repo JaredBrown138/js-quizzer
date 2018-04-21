@@ -65,7 +65,8 @@ var JsQuizzer = (function(){
                 "a2": "Suspensions; Line-of-code",
                 "a3": "Event Listeners; XHR",
                 "a4": "DOM; Conditional line-of-code",
-                "selected": ""
+                "selected": "",
+                "answer": "Breakpoints; Line-of-code"
             },
             "q2":{
                 "question": "What are object literals?",
@@ -74,7 +75,8 @@ var JsQuizzer = (function(){
                 "a2": "Simple event-registration methods for each of the commonly used and universally implemented browser events. ",
                 "a3": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces.",
                 "a4": "None of the above.",
-                "selected": ""
+                "selected": "",
+                "answer": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces."
             }
         }
     };
