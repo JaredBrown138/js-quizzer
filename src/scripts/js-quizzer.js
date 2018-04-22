@@ -1,103 +1,110 @@
-var JsQuizzer = (function(){
-    const SETTINGS_PATH = "./settings.json";
-    const QUESTIONS_PATH = "./questions/question-bank.json";
-    const CLIENT_SETTINGS_PATH = "./settings/client-settings";
-    
-    
-    var questionSet = []; //Holds the set of question objects for the quiz
-    
-    /**
-     * The setup function prepares the quiz by selecting questions
-     * using other functions.
-     */
-    function setup(){
-      
-    }
-    /** 
-     * The buildQuestionSet function builds the question set by selecting 
-     * JSON from the question bank and converting it into JS objects.
-     * These objects are then stored in the questionSet Array which is
-     * returned
-    */
-    function buildQuestionSet(){
+var JsQuizzer = function() {
+  var questionSet = questionBank; //Holds the set of question objects for the quiz
+  var questionCount = 4;
+  var protoTestObject = {};
 
-    }
-    /**
-     * A Helper function that determines the number of questions inside
-     * of the question bank.
-     */
-    function questionBankSize(questionBank){
+  /**
+   * The main function which builds the protoTestObject which
+   * is then made public through the getProtoTestObject. Used
+   * to build the main observable test object in app.js.
+   * @param {*} scrambleAnswers
+   * @param {*} scrambleQuestions
+   */
+  function setup(scrambleAnswers, scrambleQuestions) {
+    console.log(scrambleAnswers);
+    console.log(scrambleQuestions);
+    protoTestObject.questionCount = questionCount;
+    if (scrambleQuestions == "true") {
         
+        questionSet = shuffle(questionSet);
     }
-    /**
-     * Scrambles the order of the questions for the 
-     * question set.
-     */
-    function questionOrderScrambler( questionSet ){
-
+    $.each(questionSet, function(index, value) {
+      var key = "q" + (index + 1);
+      var protoSubTestObject = {};
+      protoSubTestObject.question = questionSet[index].question;
+      protoSubTestObject.category = questionSet[index].category;
+      protoSubTestObject.answer = questionSet[index].answer;
+      if (scrambleAnswers == "true") {
+        questionSet[index].answers = shuffle(questionSet[index].answers);
+      }
+      $.each(questionSet[index].answers, function(indexInner, value) {
+        var answerKey = "a" + (indexInner + 1);
+        protoSubTestObject[answerKey] = value;
+      });
+      protoSubTestObject.selected = "";
+      protoTestObject[key] = protoSubTestObject;
+    });
+  }
+  /**
+   * A Fischer-Yates Shcuffle
+   * Based on a SO Answer: https://stackoverflow.com/a/6274398
+   * @param {*} array
+   */
+  function shuffle(array) {
+    var count = array.length;
+    while (count > 0) {
+      var index = Math.floor(Math.random() * count);
+      count--;
+      var tmp = array[count];
+      array[count] = array[index];
+      array[index] = tmp;
     }
-    /** 
-     * Scrambles the order of the answers for all questions
-     * in the question set.
-    */
-    function answerOrderScrambler( questionSet ){
 
+    return array;
+  }
+  function determineScrambleAnswers() {
+    if (doesCookieExist("scrambleAnswers")) {
+      return $.cookie("scrambleAnswers");
+    } else {
+      return "false";
     }
-    /**
-     * Loads the settings into a object.
-     */
-    function settingsLoader(){
-
+  }
+  function determineScrambleQuestions() {
+    if (doesCookieExist("scrambleQuestions")) {
+        return $.cookie("scrambleQuestions");
+    } else {
+      return "false";
     }
-    
-    setup();
+  }
+  function getProtoTestObject() {
+    setup(determineScrambleAnswers(), determineScrambleQuestions());
+    return protoTestObject;
+  }
+  function doesCookieExist(cookieName) {
+    if (typeof $.cookie(cookieName) == "undefined") {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  function saveCookies(scrambleAnswers, scrambleQuestions) {
+    $.cookie("scrambleAnswers", scrambleAnswers, { expires: 7 });
+    $.cookie("scrambleQuestions", scrambleQuestions, { expires: 7 });
+    console.log("Cookies Saved!");
+  }
+  console.log(determineScrambleAnswers());
+  console.log(determineScrambleQuestions());
+   //The setup function call (builds protoTestObject)
 
-    return{
-        testLog: function(){
-            console.log("Test");
-        },
-        testObject: {
-            "questionCount": 4,
-            "q1":{
-                "question": "____________ pause running JavaScript code.  One that is most common is _____________.",
-                "category": "General",
-                "a1": "Breakpoints; Line-of-code",
-                "a2": "Suspensions; Line-of-code",
-                "a3": "Event Listeners; XHR",
-                "a4": "DOM; Conditional line-of-code",
-                "selected": "",
-                "answer": "Breakpoints; Line-of-code"
-            },
-            "q2":{
-                "question": "What are object literals?",
-                "category": "Objects",
-                "a1": "Objects that are created as functions and their properties are initialized through parameterized values.",
-                "a2": "Simple event-registration methods for each of the commonly used and universally implemented browser events. ",
-                "a3": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces.",
-                "a4": "None of the above.",
-                "selected": "",
-                "answer": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces."
-            },
-            "q3":{
-                "question": "This is a True-False Question",
-                "category": "Objects",
-                "a1": "True",
-                "a2": "False",
-                "a3": "!!TF",
-                "a4": "!!TF",
-                "selected": "",
-                "answer": "True"
-            },
-            "q4":{
-                "question": "<p>In the example below, the jQuery “_______” function is used to register an “onClick” event.</p><br ><img src=\"./media/images/jQueryCode.PNG\" class=\"questionImg\" />",
-                "category": "Objects",
-                "a1": "Objects that are created as functions and their properties are initialized through parameterized values.",
-                "a2": "Simple event-registration methods for each of the commonly used and universally implemented browser events. ",
-                "a3": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces.",
-                "a4": "None of the above.",
-                "selected": "",
-                "answer": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces."
-            }
-        }
-    };
-});
+  return {
+    testObject: getProtoTestObject(),
+    save: function(scrambleAnswers, scrambleQuestions) {
+      saveCookies(scrambleAnswers, scrambleQuestions);
+    },
+    getScrambleAnswers: function() {
+      console.log(document.cookie);
+      if (doesCookieExist("scrambleAnswers")) {
+        return $.cookie("scrambleAnswers");
+      } else {
+        return "false";
+      }
+    },
+    getScrambleQuestions: function() {
+      if (doesCookieExist("scrambleQuestions")) {
+        return $.cookie("scrambleQuestions");
+      } else {
+        return "false";
+      }
+    }
+  };
+};

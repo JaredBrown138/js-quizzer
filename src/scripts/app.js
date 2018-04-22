@@ -23,6 +23,7 @@ $(function(){
             if(!self.initialized()){
                 self.initialized(true);
                 self.JSQ = new JsQuizzer();
+                console.log(self.JSQ.testObject);
                 self.testObject = ko.mapping.fromJS(self.JSQ.testObject);
                 self.questionCount = self.testObject["questionCount"];
                 self.currentQuestionNumber = ko.observable(1).extend({notify: 'always'});

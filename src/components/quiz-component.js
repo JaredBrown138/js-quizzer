@@ -66,22 +66,30 @@ ko.components.register("quizcomponent", {
                   <div data-bind="html: question" class="question-text">What is a closure used for?</div>\
               </div>\
               <div class="question-set">\
-                  <div data-bind="if: trueFalse(a1())" class="question-answer-wrapper">\
+                  <!-- ko if: trueFalse(a1()) -->\
+                  <div class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a1, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a1" >This is an answer</label>\
                   </div>\
-                  <div data-bind="if: trueFalse(a2())"  class="question-answer-wrapper">\
+                  <!-- /ko -->\
+                  <!-- ko if: trueFalse(a2()) -->\
+                  <div  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a2, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a2">This is an answer</label>\
                   </div>\
-                  <div data-bind="if: trueFalse(a3())"  class="question-answer-wrapper">\
+                  <!-- /ko -->\
+                  <!-- ko if: trueFalse(a3()) -->\
+                  <div  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a3, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a3">This is an answer</label>\
                   </div>\
-                  <div data-bind="if: trueFalse(a4())"  class="question-answer-wrapper">\
+                  <!-- /ko -->\
+                  <!-- ko if: trueFalse(a4()) -->\
+                  <div class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a4, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a4">This is an answer</label>\
                   </div>\
+                  <!-- /ko -->\
               </div>\
               <div class="question-button-set">\
                   <div role="button" class="question-back-button unselectable">BACK</div>\

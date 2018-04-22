@@ -8,6 +8,8 @@
 ;===========================================
 */ 
 
+var jsq = new JsQuizzer();
+
 var settingsModal = {
   destroy: function() {
     $(".settings-cover").remove();
@@ -15,6 +17,7 @@ var settingsModal = {
     console.clear();
   },
   initialize: function(testObject) {
+    jsq = new JsQuizzer();
     var modal = new Markup();
     $("body").append(modal.completeMarkup);
     settingsHandler(modal, testObject);
@@ -35,23 +38,24 @@ function settingsHandler(markupObject, testObject) {
   });
 }
 
+
 var settings = {
   scrambleAnswers: {
     settingText: "Scramble the order of the answers?",
     type: "select",
     options: {
-      yes: "yes",
-      no: "no",
-      selected: "no"
+      true: "true",
+      false: "false",
+      selected: jsq.getScrambleAnswers()
     }
   },
   scrambleQuestions: {
     settingText: "Scramble the order of the questions?",
     type: "select",
     options: {
-      yes: "yes",
-      no: "no",
-      selected: "yes"
+      true: "true",
+      false: "false",
+      selected: jsq.getScrambleQuestions()
     }
   }
 };
@@ -107,11 +111,10 @@ function buildSettingsSelect(testObject, settingText, type, options, name, optio
 function saveSettings(testObject, formObject){
     var vm = ViewModel; //Local Reference to the main App ViewModel
     var updatedSettings = jQuery.extend({}, testObject);
-    console.log("The following settings have been saved:"); 
-    console.table(formObject.serializeArray());
     if( vm.initialized() === false){
-      $(".settings-modal").append("<p class='save-message'>Settings have been saved!</p>");
+      $(".settings-modal").append("<p class='save-message'>Settings have been saved! Please reload the page to Apply Settings</p>");
     }else{
-      $(".settings-modal").append("<p class='save-message'>Settings will be applied when you start your next quiz!</p>");
-    }   
+      $(".settings-modal").append("<p class='save-message'>Reload the page before next quiz to apply settings!</p>");
+    }
+    jsq.save($('select[name=scrambleAnswers').val(), $('select[name=scrambleQuestions').val() );
 }
