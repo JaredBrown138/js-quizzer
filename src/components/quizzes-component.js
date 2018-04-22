@@ -1,3 +1,12 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: The quizzes-component.js file
+    contains the VM and template for the 
+    quizzescomponent component
+===========================================
+*/
 ko.components.register("quizzescomponent", {
     viewModel: function(){
         var self = this;

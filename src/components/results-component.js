@@ -1,3 +1,12 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: The results-component.js file
+    contains the VM and template for the
+    resultscomponent component
+===========================================
+*/
 ko.components.register("resultscomponent", {
     viewModel: function() {
         var self = this;
@@ -9,11 +18,17 @@ ko.components.register("resultscomponent", {
         self.rank = ko.observable();
         self.scoreColor = ko.observable();
         self.categories = ko.observableArray();
-
+        /** 
+         * A Helper function which determines if the key
+         * is a key to question object, ie "q1" or "q3"
+        */
         self.verifyQuestionObject = function(key){
-            return (key != "questionCount" && key.length == 2);
+            return (key != "questionCount" && key.length <= 3);
         }
-
+        /**  
+         * A Helper function which determines if the object
+         * passed to it is a ko observable.
+        */
         self.verifyKoObject = function(object){
             if(typeof object == "function"){
                 return true;
@@ -21,7 +36,14 @@ ko.components.register("resultscomponent", {
                 return false;
             }
         }
-
+        /** 
+         * The teacher function is the main grading function
+         * for the application. It iterates through the completed
+         * quiz object and tallies up the correct and incorrect
+         * answers. The teacher function also contains a switch
+         * statement which determines what color to use based on
+         * the precentage score for contextual styling. 
+        */
         self.teacher = function(){
             var questionCount = self.vm.testObject.questionCount();
             var completedObj = self.completedQuizObject;
@@ -75,7 +97,7 @@ ko.components.register("resultscomponent", {
             self.scoreColor(scoreColor);
     
         }
-        self.teacher();
+        self.teacher(); //Call the teacher function
 
 
         self.arrayLoader = function( ){
@@ -86,6 +108,12 @@ ko.components.register("resultscomponent", {
             });
             
         }
+        /** 
+         * The disabled function check to make sure both values are observables, and then
+         * checks to see if the value of the current answer is the same as the selected.
+         * If it is not, then the radio button is disabled ensuring that only the selected
+         * radio button is not disabled.
+        */
         self.disabled = function(txtValue, selected){
             if(typeof txtValue == "function" && typeof selected == "function"){
                 if(txtValue() == selected()){
@@ -98,6 +126,11 @@ ko.components.register("resultscomponent", {
             }
         }
         self.arrayLoader();
+        /** 
+         * The is questionCorrect function checks to see if the user
+         * selected the right answer. If they did, then this function
+         * returns green styling, or red if they missed the question. 
+        */
         self.isQuestionCorrect = function(answer, selected){
             var correct = "15px solid #1ada89";
             var incorrect = "15px solid #c84318";
@@ -111,6 +144,10 @@ ko.components.register("resultscomponent", {
                 return incorrect;
             }
         }
+        /**  
+         * The check function places a small green checkmark next to the correct
+         * answer. 
+        */
         self.check = function(current, answer){
             if(typeof current == "function" && typeof answer == "function"){
                 if(current() == answer()){
@@ -122,6 +159,10 @@ ko.components.register("resultscomponent", {
                 return false;
             }
         }
+        /**  
+         * The wrong function places an x next to the selected value if it
+         * is incorrect.
+        */
         self.wrong = function(current, selected, answer){
             if(typeof selected == "function" && typeof answer == "function" && typeof current == "function"){
                 if( current() !== answer() ){
@@ -136,6 +177,9 @@ ko.components.register("resultscomponent", {
                 return false;
             } 
         }
+        /**  
+         * The truFalse function hides the extra unused answers for true false questions.
+        */
         self.trueFalse = function(value){
             if(value == "!!TF"){
                 return false

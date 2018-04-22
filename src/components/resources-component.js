@@ -1,3 +1,12 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: The resources-component.js 
+    file contains the template for the
+    resourcescomponent component
+===========================================
+*/
 ko.components.register("resourcescomponent", {
     template:
     '<img class="home-image" src="media/images/startup.jpg" />\

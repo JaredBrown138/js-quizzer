@@ -1,6 +1,15 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: A script which prepares the
+  test object based on either saved settings
+  using cookies or default settings.
+===========================================
+*/
 var JsQuizzer = function() {
   var questionSet = questionBank; //Holds the set of question objects for the quiz
-  var questionCount = 4;
+  var questionCount = 10;
   var protoTestObject = {};
 
   /**
@@ -15,7 +24,6 @@ var JsQuizzer = function() {
     console.log(scrambleQuestions);
     protoTestObject.questionCount = questionCount;
     if (scrambleQuestions == "true") {
-        
         questionSet = shuffle(questionSet);
     }
     $.each(questionSet, function(index, value) {
@@ -52,6 +60,9 @@ var JsQuizzer = function() {
 
     return array;
   }
+  /** 
+   * If a cookie exists, use it. Otherwise use default value
+  */
   function determineScrambleAnswers() {
     if (doesCookieExist("scrambleAnswers")) {
       return $.cookie("scrambleAnswers");
@@ -59,6 +70,9 @@ var JsQuizzer = function() {
       return "false";
     }
   }
+  /** 
+   * If a cookie exists, use it. Otherwise use default value
+  */
   function determineScrambleQuestions() {
     if (doesCookieExist("scrambleQuestions")) {
         return $.cookie("scrambleQuestions");
@@ -66,10 +80,16 @@ var JsQuizzer = function() {
       return "false";
     }
   }
+  /** 
+   * A getter function for the protoTestObject.
+  */
   function getProtoTestObject() {
     setup(determineScrambleAnswers(), determineScrambleQuestions());
     return protoTestObject;
   }
+  /** 
+   * A helper function which determines if a cookie exists. 
+  */
   function doesCookieExist(cookieName) {
     if (typeof $.cookie(cookieName) == "undefined") {
       return false;
@@ -77,13 +97,14 @@ var JsQuizzer = function() {
       return true;
     }
   }
+  /** 
+   * Saves the settings from settings-modal.js to cookies
+  */
   function saveCookies(scrambleAnswers, scrambleQuestions) {
     $.cookie("scrambleAnswers", scrambleAnswers, { expires: 7 });
     $.cookie("scrambleQuestions", scrambleQuestions, { expires: 7 });
     console.log("Cookies Saved!");
   }
-  console.log(determineScrambleAnswers());
-  console.log(determineScrambleQuestions());
    //The setup function call (builds protoTestObject)
 
   return {

@@ -1,3 +1,11 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: A script which handles navigation
+    in the application.
+===========================================
+*/
 const CONFIRM_MESSAGE = "Are you sure you would like to return home? " +
      "Answers will not be saved";
 

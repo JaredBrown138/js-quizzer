@@ -1,3 +1,12 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: The about-component.js file
+    holds the template for the aboutcomponents
+    component.
+===========================================
+*/
 ko.components.register("aboutcomponent", {
     template:
     '<div class="about-background"></div>\

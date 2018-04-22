@@ -1,7 +1,15 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: The navbar-component.js file
+    holds the VM and template for the
+    navbarcomponent component. 
+===========================================
+*/
 ko.components.register("navbarcomponent", {
     viewModel: function(){
         var self = this;
-        
         self.vm = ViewModel; //Local Reference to Main App ViewModel
 
         self.initialized = ko.computed(function(){

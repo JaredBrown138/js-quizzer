@@ -1,55 +1,82 @@
+/*
+============================================
+ Author: Advanced Prototyping
+ Date:   May 2018
+ Description: The quiz-component.js file
+    contains the VM and template for the
+    quizcomponent component.
+===========================================
+*/
 ko.components.register("quizcomponent", {
     viewModel: function(questionObject) {
-      this.vm = ViewModel;
+      var self = this;
       
+      self.vm = ViewModel;
       
-      
-      this.progressTracker = ko.computed(function(){
-          return this.vm.progressTracker()
-      }, this);
+      self.progressTracker = ko.computed(function(){
+          return self.vm.progressTracker()
+      }, self);
 
-      this.currentQuestionObject = ko.computed(function(){
-          return this.vm.currentQuestionObject()
-      }, this);
-      
-      this.nextText = ko.computed(function(){
-          if(this.vm.currentQuestionNumber() == this.vm.testObject["questionCount"]()){
+      self.currentQuestionObject = ko.computed(function(){
+          return self.vm.currentQuestionObject()
+      }, self);
+      /** 
+       * Determines if the next button should display
+       * NEXT QUESTION or SUBMIT QUIZ by doing some
+       * comparison.
+      */
+      self.nextText = ko.computed(function(){
+          if(self.vm.currentQuestionNumber() == self.vm.testObject["questionCount"]()){
               return "SUBMIT QUIZ";
           }else{
               return"NEXT QUESTION";
           }
-      }, this);
+      }, self);
       
-      this.question = ko.computed(function(){
-          return this.currentQuestionObject().question();
-      }, this);
+      self.question = ko.computed(function(){
+          return self.currentQuestionObject().question();
+      }, self);
 
-      this.a1 = ko.computed(function(){
-          return this.currentQuestionObject().a1();
-      }, this);
+      self.a1 = ko.computed(function(){
+          return self.currentQuestionObject().a1();
+      }, self);
 
-      this.a2 = ko.computed(function(){
-          return this.currentQuestionObject().a2();
-      }, this);
+      self.a2 = ko.computed(function(){
+          return self.currentQuestionObject().a2();
+      }, self);
 
-      this.a3 = ko.computed(function(){
-          return this.currentQuestionObject().a3();
-      }, this);
+      self.a3 = ko.computed(function(){
+          return self.currentQuestionObject().a3();
+      }, self);
 
-      this.a4 = ko.computed(function(){
-          return this.currentQuestionObject().a4();
-      }, this);
+      self.a4 = ko.computed(function(){
+          return self.currentQuestionObject().a4();
+      }, self);
 
-      this.selected = ko.computed(function(){
-          return this.currentQuestionObject().selected();
-      }, this);
-
-      this.clicked = function(){
+      self.selected = ko.computed(function(){
+          return self.currentQuestionObject().selected();
+      }, self);
+      /** 
+       * The clicked function is bound to the ko click binding.
+       * When the user clicks on an option a bit of jQuery gets
+       * the selected value and then the selected property of the
+       * current object is set to that value.
+      */
+      self.clicked = function(){
           var value = $('input[name=\'option\']:checked').val();
-          this.currentQuestionObject().selected(value);
+          self.currentQuestionObject().selected(value);
           return true;
       }
-      this.trueFalse = function(value){
+      /** 
+       * The trueFals function determines if the value of the current answer
+       * is equal to !!TF. If so it returns false. This function is utilized 
+       * in a KO if binding that controls whether that answer shows up as
+       * a possible choice. The need for this arises when you have a true or false
+       * question which only requires two options. You can disable the other two
+       * options by setting their value to !!TF. This approach is repeated in the
+       * resultscomponent. 
+      */
+      self.trueFalse = function(value){
           if(value == "!!TF"){
               return false
           }else{
@@ -69,25 +96,25 @@ ko.components.register("quizcomponent", {
                   <!-- ko if: trueFalse(a1()) -->\
                   <div class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a1, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
-                      <label data-bind="text: a1" >This is an answer</label>\
+                      <label data-bind="text: a1" >self is an answer</label>\
                   </div>\
                   <!-- /ko -->\
                   <!-- ko if: trueFalse(a2()) -->\
                   <div  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a2, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
-                      <label data-bind="text: a2">This is an answer</label>\
+                      <label data-bind="text: a2">self is an answer</label>\
                   </div>\
                   <!-- /ko -->\
                   <!-- ko if: trueFalse(a3()) -->\
                   <div  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a3, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
-                      <label data-bind="text: a3">This is an answer</label>\
+                      <label data-bind="text: a3">self is an answer</label>\
                   </div>\
                   <!-- /ko -->\
                   <!-- ko if: trueFalse(a4()) -->\
                   <div class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a4, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
-                      <label data-bind="text: a4">This is an answer</label>\
+                      <label data-bind="text: a4">self is an answer</label>\
                   </div>\
                   <!-- /ko -->\
               </div>\
