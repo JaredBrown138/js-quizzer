@@ -24,6 +24,7 @@
    $(document.body).on("click", ".settings-save", function() {
      saveSettings(settings, $("#settings-form"));
    });
+   
 
    /** 
     ---------- NAVBAR Bindings ----------
@@ -33,6 +34,15 @@
   });
   $(document.body).on("click", ".actionButton", function() {
     navigate("actionButton");
+  });
+  $(document.body).on("click", ".navbar-quizzes", function() {
+    navigate("quizzes");
+  });
+  $(document.body).on("click", ".navbar-resources", function() {
+    navigate("resources");
+  });
+  $(document.body).on("click", ".navbar-about", function() {
+    navigate("about");
   });
    
    
@@ -54,6 +64,24 @@
   $(document.body).on("click", ".question-back-button", function() {
     console.log('clicked');
     ViewModel.regress();
+  });
+
+  /** 
+     ---------- Results Component Bindings ----------
+    */
+  $(document.body).on("click", ".results-print-button", function() {
+    window.print();
+  });
+  
+  $(document.body).on("click", ".results-again-button", function() {
+    ViewModel.start();
+  });
+
+  /** 
+     ---------- Quizzes Component Bindings ----------
+    */
+   $(document.body).on("click", ".quizzes-item-button", function() {
+    quizzesActionButton();
   });
 
 

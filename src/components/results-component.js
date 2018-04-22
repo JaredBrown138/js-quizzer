@@ -42,28 +42,33 @@ ko.components.register("resultscomponent", {
                     
                 }
             });
-            var percentage = (correctQuestions / questionCount) * 100;
+            console.log(correctQuestions);
+            var percentage = ((correctQuestions / questionCount) * 100).toFixed(2);
             var percentageTxt = percentage.toString() + "%";
             var scoreText = "" + correctQuestions + "/" + questionCount + " (" + percentageTxt + ")";
             var rankTxt = "";
             var scoreColor = "";
+            console.log(percentage <= 60);
+            console.log(percentage <= 80);
             switch(true){
-                case (percentage <= 30):
+                case (percentage <= 30.00):
                     rankTxt = "BEGINNER";
                     scoreColor = "#c84318";
                     break;
-                case (percentage < 60):
+                case (percentage <= 60.00):
                     rankTxt = "BEGINNER";
-                    scoreColor = "#da891a"
+                    scoreColor = "#da891a";
                     break;
-                case (percentage <= 80):
-                    scoreColor = "cbda1a"
+                case (percentage <= 80.00):
+                    scoreColor = "#cbda1a";
                     rankTxt = "NOVICE";
                     break;
-                case (percentage <= 100):
+                case (percentage <= 100.00):
                     rankTxt = "EXPERT";
-                    scoreColor = "#1ada89"
-                    break;        
+                    scoreColor = "#1ada89";
+                    break;
+                default:
+                    console.log("default");            
             }
             self.rank(rankTxt);
             self.score(scoreText);
@@ -131,38 +136,45 @@ ko.components.register("resultscomponent", {
                 return false;
             } 
         }
+        self.trueFalse = function(value){
+            if(value == "!!TF"){
+                return false
+            }else{
+                return true;
+            }
+        }
         
     },
     template:
       '<div class="results-wrapper">\
       <div class="results-questions-wrapper">\
           <div data-bind="foreach: questionArray" class="results-question">\
-              <h1 data-bind="style: {borderLeft: $parent.isQuestionCorrect(answer, selected)}" class="results-question-heading">\
-              QUESTION <!-- ko text:($index() + 1) --> <!-- /ko --> - \
-              <p class="results-question-text"><!-- ko text: question --><!-- /ko --></p>\
-              </h1>\
-              <div class="results-answer-wrapper">\
+              <div data-bind="style: {borderLeft: $parent.isQuestionCorrect(answer, selected)}" class="results-question-heading">\
+              <h1>QUESTION <!-- ko text:($index() + 1) --> <!-- /ko -->:</h1> \
+              <div data-bind="html: question" class="results-question-text"></div>\
+              </div>\
+              <div data-bind="if: $parent.trueFalse(a1())" class="results-answer-wrapper">\
                   <div class="check-container"> <span data-bind="if: $parent.check(a1, answer)" class="check" >\
                   <img src="./media/images/check.PNG" />\
                   </span><span data-bind="if: $parent.wrong(a1, selected, answer)" class="wrong"><img src="./media/images/wrong.PNG" /></span></div>\
                   <input data-bind="checkedValue: a1, checked: selected, disable: $parent.disabled(a1, selected) " type="radio" class="results-radio-button">\
                   <label data-bind="text: a1" >This is an answer</label>\
               </div>\
-              <div class="results-answer-wrapper">\
+              <div data-bind="if: $parent.trueFalse(a2())" class="results-answer-wrapper">\
                   <div class="check-container"> <span data-bind="if: $parent.check(a2, answer)" class="check" >\
                   <img src="./media/images/check.PNG" />\
                   </span><span data-bind="if: $parent.wrong(a2, selected, answer)" class="wrong"><img src="./media/images/wrong.PNG" /></span></div>\
                   <input data-bind="checkedValue: a2, checked: selected, disable: $parent.disabled(a2, selected) " type="radio" class="results-radio-button">\
                   <label data-bind="text: a2">This is an answer</label>\
               </div>\
-              <div class="results-answer-wrapper">\
+              <div data-bind="if: $parent.trueFalse(a3())" class="results-answer-wrapper">\
                   <div class="check-container"> <span data-bind="if: $parent.check(a3, answer)" class="check" >\
                   <img src="./media/images/check.PNG" />\
                   </span><span data-bind="if: $parent.wrong(a3, selected, answer)" class="wrong"><img src="./media/images/wrong.PNG" /></span></div>\
                   <input data-bind="checkedValue: a3, checked: selected, disable: $parent.disabled(a3, selected) " type="radio" checked class="results-radio-button">\
                   <label data-bind="text: a3">This is an answer</label>\
               </div>\
-              <div class="results-answer-wrapper">\
+              <div data-bind="if: $parent.trueFalse(a4())" class="results-answer-wrapper">\
                   <div class="check-container"> <span data-bind="if: $parent.check(a4, answer)" class="check" >\
                   <img src="./media/images/check.PNG" />\
                   </span><span data-bind="if: $parent.wrong(a4, selected, answer)" class="wrong"><img src="./media/images/wrong.PNG" /></span></div>\
@@ -180,24 +192,9 @@ ko.components.register("resultscomponent", {
               <h2 class="results-rank-header">RANK</h2>\
               <h1 data-bind="text: rank(), style: {color: scoreColor}" class="results-rank-text">EXPERT</h1>\
           </div>\
-          <div class="results-score-display">\
-              <h2 class="results-category-header">CATEGORIES</h2>\
-              <div>\
-                  <h3 class="results-category-name">Objects:</h3>\
-                  <h3 class="results-category-score green">2/2</h3>\
-              </div>\
-              <div>\
-                  <h3 class="results-category-name">Control Blocks:</h3>\
-                  <h3 class="results-category-score red">0/1</h3>\
-              </div>\
-              <div>\
-                  <h3 class="results-category-name">Functions</h3>\
-                  <h3 class="results-category-score green">2/2</h3>\
-              </div>\
-          </div>\
           <div class="results-button-group">\
-              <div class="results-print-button" role="button">PRINT RESULTS</div>\
-              <div class="results-again-button" role="button">TAKE AGAIN</div>\
+              <div class="results-print-button unselectable" role="button">PRINT RESULTS</div>\
+              <div class="results-again-button unselectable" role="button">TAKE AGAIN</div>\
           </div>\
       </div>\
   </div>'

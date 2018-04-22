@@ -57,7 +57,7 @@ var JsQuizzer = (function(){
             console.log("Test");
         },
         testObject: {
-            "questionCount": 2,
+            "questionCount": 4,
             "q1":{
                 "question": "____________ pause running JavaScript code.  One that is most common is _____________.",
                 "category": "General",
@@ -70,6 +70,26 @@ var JsQuizzer = (function(){
             },
             "q2":{
                 "question": "What are object literals?",
+                "category": "Objects",
+                "a1": "Objects that are created as functions and their properties are initialized through parameterized values.",
+                "a2": "Simple event-registration methods for each of the commonly used and universally implemented browser events. ",
+                "a3": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces.",
+                "a4": "None of the above.",
+                "selected": "",
+                "answer": "A comma-separated list of colon-separated name:value pairs, enclosed within curly braces."
+            },
+            "q3":{
+                "question": "This is a True-False Question",
+                "category": "Objects",
+                "a1": "True",
+                "a2": "False",
+                "a3": "!!TF",
+                "a4": "!!TF",
+                "selected": "",
+                "answer": "True"
+            },
+            "q4":{
+                "question": "<p>In the example below, the jQuery “_______” function is used to register an “onClick” event.</p><br ><img src=\"./media/images/jQueryCode.PNG\" class=\"questionImg\" />",
                 "category": "Objects",
                 "a1": "Objects that are created as functions and their properties are initialized through parameterized values.",
                 "a2": "Simple event-registration methods for each of the commonly used and universally implemented browser events. ",

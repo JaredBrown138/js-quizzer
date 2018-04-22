@@ -84,7 +84,7 @@ $(function(){
            
             var answerCount = self.getAnsweredCount();
             var unanswered = self.testObject.questionCount() - self.getAnsweredCount()
-            var confirmComplete = "Dear Sir/Madam," + "\n\n" +  "You have unfortunately left " + unanswered +
+            var confirmComplete = "Dear User," + "\n\n" +  "You have unfortunately left " + unanswered +
                 " question(s) blank. Please go back and answer them." + "\n\n" + "Best Regards," +
                 "\n" +  "Management";
             if(answerCount < self.questionCount()){

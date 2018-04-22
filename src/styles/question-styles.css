@@ -25,6 +25,7 @@
 .question-set{
   padding: 25px;
   margin-bottom: 70px;
+  min-height: 200px;
 }
 .question-answer-wrapper{
   padding: 15px;

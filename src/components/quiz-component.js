@@ -1,7 +1,9 @@
 ko.components.register("quizcomponent", {
     viewModel: function(questionObject) {
       this.vm = ViewModel;
-        
+      
+      
+      
       this.progressTracker = ko.computed(function(){
           return this.vm.progressTracker()
       }, this);
@@ -10,7 +12,13 @@ ko.components.register("quizcomponent", {
           return this.vm.currentQuestionObject()
       }, this);
       
-      
+      this.nextText = ko.computed(function(){
+          if(this.vm.currentQuestionNumber() == this.vm.testObject["questionCount"]()){
+              return "SUBMIT QUIZ";
+          }else{
+              return"NEXT QUESTION";
+          }
+      }, this);
       
       this.question = ko.computed(function(){
           return this.currentQuestionObject().question();
@@ -41,6 +49,13 @@ ko.components.register("quizcomponent", {
           this.currentQuestionObject().selected(value);
           return true;
       }
+      this.trueFalse = function(value){
+          if(value == "!!TF"){
+              return false
+          }else{
+              return true;
+          }
+      }
   
     },
     template:
@@ -48,29 +63,29 @@ ko.components.register("quizcomponent", {
           <div class="question-box">\
               <div class="question-header">\
                   <h2 class="question-header-text">QUESTION:  </h2>\
-                  <p data-bind="text: question" class="question-text">What is a closure used for?</p>\
+                  <div data-bind="html: question" class="question-text">What is a closure used for?</div>\
               </div>\
               <div class="question-set">\
-                  <div class="question-answer-wrapper">\
+                  <div data-bind="if: trueFalse(a1())" class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a1, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a1" >This is an answer</label>\
                   </div>\
-                  <div class="question-answer-wrapper">\
+                  <div data-bind="if: trueFalse(a2())"  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a2, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a2">This is an answer</label>\
                   </div>\
-                  <div class="question-answer-wrapper">\
+                  <div data-bind="if: trueFalse(a3())"  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a3, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a3">This is an answer</label>\
                   </div>\
-                  <div class="question-answer-wrapper">\
+                  <div data-bind="if: trueFalse(a4())"  class="question-answer-wrapper">\
                       <input data-bind="checkedValue: a4, checked: selected, click: clicked" type="radio" class="question-radio-button" name="option">\
                       <label data-bind="text: a4">This is an answer</label>\
                   </div>\
               </div>\
               <div class="question-button-set">\
                   <div role="button" class="question-back-button unselectable">BACK</div>\
-                  <div role="button" class="question-next-button unselectable">NEXT QUESTION</div>\
+                  <div data-bind="text: nextText()" role="button" class="question-next-button unselectable">NEXT QUESTION</div>\
               </div>\
               <div data-bind="text: progressTracker" class="question-counter">QUESTION 1 OF 10</div>\
           </div> </div>'
