@@ -35,7 +35,7 @@ ko.components.register("aboutcomponent", {
             TypeScript, Java, PHP, Python, HTML, CSS, Angular, SQL, Ionic, Bootstrap, Wordpress,\
             phpMyAdmin, and MySQL.\
             Jared currently attends Bellevue University for his Bachelors in Web Development. </p>\
-            <a href="fds" class="about-profileCard-github">Github</a>\
+            <a href="https://github.com/JaredBrown138" class="about-profileCard-github">Github</a>\
         </div>\
     </div>\
     <div class="about-profileCard">\
@@ -52,7 +52,7 @@ ko.components.register("aboutcomponent", {
             not plugging away on the computer, Heather enjoys cooking homemade meals, reading books,\
             and vacationing.  As a student of Bellevue University back in June 2016, classes that have\
             become of interest to her are HTML, CSS, and JavaScript</p>\
-            <a href="" class="about-profileCard-github">Github</a>\
+            <a href="https://github.com/HeatherPetersonLMM" class="about-profileCard-github">Github</a>\
         </div>\
     </div>\
     <div class="about-profileCard">\
@@ -72,7 +72,7 @@ ko.components.register("aboutcomponent", {
             Hector has been a licensed nursing home administrator for seven years and is currently the\
             administrator at Saint Joseph Villa Nursing Center. He has been married to his wife Rhonda\
             for 12 years. Together they have four children and enjoy the love of nine grandchildren.</p>\
-            <a href="" class="about-profileCard-github">Github</a>\
+            <a href="https://github.com/hleguillow1" class="about-profileCard-github">Github</a>\
         </div>\
     </div>\
     <div class="about-profileCard">\
@@ -116,7 +116,7 @@ ko.components.register("aboutcomponent", {
             Matthew is married with one daughter.  He and his wife met in 2010 and were married in\
             August 2011.  Their daughter was born in May 2012 and they are the joy of his life.\
             </p>\
-            <a href="" class="about-profileCard-github">Github</a>\
+            <a href="https://github.com/mhoward14" class="about-profileCard-github">Github</a>\
         </div>\
     </div>\
     </div>\
